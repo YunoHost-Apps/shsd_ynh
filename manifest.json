@@ -1,0 +1,51 @@
+{
+    "name": "Self-Hosting Security Dashboard",
+    "id": "shsd",
+    "packaging_format": 1,
+    "description": {
+        "en": "SHSD monitors usage of mail accounts to detect accounts compromission",
+        "fr": "SHSD surveille les connections mails d'un serveur YunoHost et détécte les commptes compromis."
+    },
+    "version": "1.0",
+    "url": "https://github.com/dynamid/shsd_ynh",
+    "license": "free",
+    "maintainer": {
+        "name": "François Lesueur",
+        "email": "francois.lesueur@insa-lyon.fr",
+        "url": "http://perso.citi-lab.fr/flesueur/"
+    },
+    "requirements": {
+        "yunohost": ">= 2.7.2"
+    },
+    "multi_instance": false,
+    "services": [
+        "nginx",
+        "sqlite3",
+        "python3-sqlalchemy",
+        "dovecot"
+    ],
+    "arguments": {
+        "install" : [
+
+            {
+                "name": "path",
+                "type": "path",
+                "ask": {
+                    "en": "Choose a path for ynhexample",
+                    "fr": "Choisissez un chemin pour ynhexample"
+                },
+                "example": "/home/user/SHSD",
+                "default": "/home/user"
+            },
+            {
+                "name": "language",
+                "ask": {
+                    "en": "Choose the application language",
+                    "fr": "Choisissez la langue de l'application"
+                },
+                "choices": ["fr", "en"],
+                "default": "fr"
+            }
+        ]
+    }
+}
