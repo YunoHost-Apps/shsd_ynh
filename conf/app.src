@@ -1,5 +1,5 @@
 SOURCE_URL=https://github.com/dynamid/shsd/archive/master.zip
-SOURCE_SUM=738502ec5d6e4817cc468dcb5fe29bd8645cd6df1f178b4379a0cf6f8e696fa3
+SOURCE_SUM=d96df5264b7e5688ae86dcbd14bdca81003d43238e32b112fcd2f86c3b41cc8b
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=zip
 SOURCE_IN_SUBDIR=true
