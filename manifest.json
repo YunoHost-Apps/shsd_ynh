@@ -17,25 +17,41 @@
     "requirements": {
         "yunohost": ">= 2.7.2"
     },
-    "multi_instance": false,
+    "multi_instance": true,
     "services": [
         "nginx",
-        "sqlite3",
-        "python3-sqlalchemy",
         "dovecot"
     ],
     "arguments": {
         "install" : [
+            {
+                "name": "domain",
+                "type": "domain",
+                "ask": {
+                    "en": "Choose a domain name for ynhexample",
+                    "fr": "Choisissez un nom de domaine pour ynhexample"
+                },
+                "example": "shsd.packaging"
+            },
 
             {
                 "name": "path",
                 "type": "path",
                 "ask": {
-                    "en": "Choose a path for ynhexample",
-                    "fr": "Choisissez un chemin pour ynhexample"
+                    "en": "Choose a path for SHSD",
+                    "fr": "Choisissez un chemin pour SHSD"
                 },
-                "example": "/home/user/SHSD",
-                "default": "/home/user"
+                "example": "/shsd",
+                "default": "/shsd"
+            },
+            {
+                "name": "is_public",
+                "type": "boolean",
+                "ask": {
+                    "en": "Is it a public application?",
+                    "fr": "Est-ce une application publique ?"
+                },
+                "default": true
             },
             {
                 "name": "language",

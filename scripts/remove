@@ -17,8 +17,6 @@ app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get $app domain)
 port=$(ynh_app_setting_get $app port)
-db_name=$(ynh_app_setting_get $app db_name)
-db_user=$db_name
 final_path=$(ynh_app_setting_get $app final_path)
 
 #=================================================
@@ -49,13 +47,6 @@ sudo service nginx reload
 ynh_remove_app_dependencies
 
 #=================================================
-# REMOVE THE MYSQL DATABASE
-#=================================================
-
-# Remove a database if it exists, along with the associated user
-ynh_mysql_remove_db $db_user $db_name
-
-#=================================================
 # REMOVE APP MAIN DIR
 #=================================================
 
@@ -82,7 +73,10 @@ ynh_remove_fpm_config
 
 # Remove the app-specific logrotate config
 ynh_remove_logrotate
-
+#=================================================
+# REMOVE CONFIG
+#=================================================
+ynh_secure_remove /etc/shsd.conf
 #=================================================
 # CLOSE A PORT
 #=================================================
@@ -102,8 +96,6 @@ fi
 # Remove a cron file
 ynh_secure_remove "/etc/cron.d/$app"
 
-# Remove a directory securely
-ynh_secure_remove "/etc/$app/"
 
 # Remove the log files
 ynh_secure_remove "/var/log/$app/"
