@@ -61,13 +61,6 @@ ynh_secure_remove "$final_path"
 ynh_remove_nginx_config
 
 #=================================================
-# REMOVE PHP-FPM CONFIGURATION
-#=================================================
-
-# Remove the dedicated php-fpm config
-ynh_remove_fpm_config
-
-#=================================================
 # REMOVE LOGROTATE CONFIGURATION
 #=================================================
 
@@ -76,6 +69,7 @@ ynh_remove_logrotate
 #=================================================
 # REMOVE CONFIG
 #=================================================
+
 ynh_secure_remove /etc/shsd.conf
 #=================================================
 # CLOSE A PORT
