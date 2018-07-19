@@ -174,4 +174,4 @@ ynh_app_setting_delete $app skipped_uris
 
 systemctl reload nginx
 #systemctl daemon-reload
-systemctl shsd start
+systemctl start shsd
