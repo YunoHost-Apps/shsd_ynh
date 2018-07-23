@@ -2,4 +2,4 @@
 # Regular cron job for the shsd package,
 # Reads the IMAP logs.
 #
-5 * * * *      root    [ -x __FINALPATH__/workers/loggers/imap-dovecot.py ] && __FINALPATH__/workers/loggers/imap-dovecot.py > /dev/null
+*/5 * * * *      root    [ -x __FINALPATH__/workers/loggers/imap-dovecot.py ] && __FINALPATH__/workers/loggers/imap-dovecot.py > /dev/null
