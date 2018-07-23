@@ -36,8 +36,7 @@ then
 	echo "Remove $app service"
 	yunohost service remove $app
 fi
-rm -f /etc/nginx/conf.d/$domain.d/$app.conf
-sudo service nginx reload
+
 #=================================================
 # REMOVE DEPENDENCIES
 #=================================================
@@ -58,6 +57,8 @@ ynh_secure_remove "$final_path"
 
 # Remove the dedicated nginx config
 ynh_remove_nginx_config
+sudo service nginx reload
+
 
 #=================================================
 # REMOVE LOGROTATE CONFIGURATION
