@@ -26,6 +26,8 @@ language=$YNH_APP_ARG_LANGUAGE
 # CREATE
 #=================================================
 mkdir -p /var/lib/shsd
+chown -R shsd: /var/lib/shsd
+
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
