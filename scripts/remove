@@ -65,7 +65,7 @@ sudo service nginx reload
 #=================================================
 
 # Remove the app-specific logrotate config
-ynh_remove_logrotate
+#ynh_remove_logrotate
 #=================================================
 # REMOVE CONFIG
 #=================================================
@@ -92,7 +92,7 @@ ynh_secure_remove "/etc/cron.d/$app"
 
 
 # Remove the log files
-ynh_secure_remove "/var/log/$app/"
+#ynh_secure_remove "/var/log/$app/"
 
 #=================================================
 # GENERIC FINALIZATION
