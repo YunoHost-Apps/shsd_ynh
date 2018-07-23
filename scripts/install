@@ -173,3 +173,6 @@ ynh_app_setting_delete $app skipped_uris
 systemctl reload nginx
 #systemctl daemon-reload
 systemctl start shsd
+
+# add cron task to read logs
+sudo mv ./conf/cron /etc/cron.d/$app
