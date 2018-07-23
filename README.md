@@ -34,7 +34,7 @@ It is aimed to be watched by the final users :
 * If some points are in a strange area (a foreign country or an anormal ISP for instance), user should detect this unusual pattern and then ask the hoster/forums. It may mean that the account has been used by a third-party
 * SHSD focus on the detection part, the remediation is out of our scope. We think that the global community on forums is quite efficient for remediation as soon as problems are detected.
 
-![SHSD](https://github.com/dynamid/shsd/doc/screenshot.png)
+![SHSD](https://github.com/dynamid/shsd/blob/master/doc/screenshot.png)
 
  In a nutshell, SHSD tries to leverage users' unconscious reactions confronted with some change on a page which is usually quite static.
 
