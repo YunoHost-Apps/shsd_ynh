@@ -65,7 +65,9 @@ ynh_app_setting_set $app port $port
 # INSTALL DEPENDENCIES
 #=================================================
 
-ynh_install_app_dependencies python3 python3-sqlalchemy python3-flask python3-geojson python3-geoip geoip-database-extra
+apt-get install -y geoip-database-contrib
+ynh_install_app_dependencies python3 python3-sqlalchemy python3-flask python3-geojson python3-geoip
+#geoip-database-extra
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -161,7 +163,7 @@ chown -R root: $final_path
 # ADVERTISE SERVICE IN ADMIN PANEL
 #=================================================
 
-yunohost service add $app --log "/var/log/$app.log"
+yunohost service add $app --log "/var/log/daemon.log"
 
 #=================================================
 # SETUP SSOWAT
