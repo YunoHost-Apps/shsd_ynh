@@ -175,4 +175,4 @@ systemctl reload nginx
 systemctl start shsd
 
 # add cron task to read logs
-sudo mv ./conf/cron /etc/cron.d/$app
+sudo mv ../conf/cron /etc/cron.d/$app
