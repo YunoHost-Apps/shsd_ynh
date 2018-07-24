@@ -76,9 +76,10 @@ ynh_install_app_dependencies python3 python3-sqlalchemy python3-flask python3-ge
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
 #ynh_setup_source "$final_path"
+mkdir -p "$final_path"
 wget https://github.com/dynamid/shsd/archive/master.zip -O /tmp/shsd.zip
-unzip /tmp/shsd.zip -d /tmp
-mv /tmp/shsd-master/* $final_path
+unzip -u /tmp/shsd.zip -d /tmp
+mv /tmp/shsd-master/* "$final_path"
 ynh_secure_remove /tmp/shsd.zip
 ynh_secure_remove /tmp/shsd-master
 
