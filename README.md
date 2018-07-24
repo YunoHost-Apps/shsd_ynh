@@ -52,3 +52,7 @@ Notably, exists :
 SHSD aims to provide value to self-hosters who are not security experts. To achieve this, SHSD leverages specific knowledge and insights a self-hoster may have about his own devices or the few hosted guest accounts.
 
 SHSD does not feature any AI nor precog features.
+
+# Install notes
+
+SHSD can be installed with `yunohost app install https://github.com/dynamid/shsd_ynh`
