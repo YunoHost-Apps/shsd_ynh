@@ -1,5 +1,5 @@
 [Unit]
-Description=SHSD service
+Description=Self-Hosting Security Dashboard (SHSD)
 After=network.target
 
 [Service]

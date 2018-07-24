@@ -6,7 +6,6 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -22,13 +21,6 @@ final_path=$(ynh_app_setting_get $app final_path)
 #=================================================
 # STANDARD REMOVE
 #=================================================
-# STOP AND REMOVE SERVICE
-#=================================================
-
-# Remove the dedicated systemd config
-ynh_remove_systemd_config
-
-#=================================================
 # REMOVE SERVICE FROM ADMIN PANEL
 #=================================================
 
@@ -37,8 +29,14 @@ then
 	echo "Remove $app service"
 	yunohost service remove $app
 fi
-rm -f /etc/nginx/conf.d/$domain.d/$app.conf
-sudo service nginx reload
+
+#=================================================
+# STOP AND REMOVE SERVICE
+#=================================================
+# Remove the dedicated systemd config
+ynh_remove_systemd_config
+
+
 #=================================================
 # REMOVE DEPENDENCIES
 #=================================================
@@ -59,13 +57,15 @@ ynh_secure_remove "$final_path"
 
 # Remove the dedicated nginx config
 ynh_remove_nginx_config
+sudo service nginx reload
+
 
 #=================================================
 # REMOVE LOGROTATE CONFIGURATION
 #=================================================
 
 # Remove the app-specific logrotate config
-ynh_remove_logrotate
+#ynh_remove_logrotate
 #=================================================
 # REMOVE CONFIG
 #=================================================
@@ -92,7 +92,7 @@ ynh_secure_remove "/etc/cron.d/$app"
 
 
 # Remove the log files
-ynh_secure_remove "/var/log/$app/"
+#ynh_secure_remove "/var/log/$app/"
 
 #=================================================
 # GENERIC FINALIZATION

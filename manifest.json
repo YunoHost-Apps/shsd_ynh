@@ -4,8 +4,8 @@
     "id": "shsd",
     "packaging_format": 1,
     "description": {
-        "en": "SHSD monitors usage of mail accounts to detect accounts compromission",
-        "fr": "SHSD surveille les connections mails d'un serveur YunoHost et détécte les commptes compromis."
+        "en": "SHSD monitors connections to a Yunohost server to help detecting accounts compromission",
+        "fr": "SHSD surveille les connexions à un serveur YunoHost pour aider à la détection de comptes compromis."
     },
     "version": "1.0",
     "url": "https://github.com/dynamid/shsd_ynh",
