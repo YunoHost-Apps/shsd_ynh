@@ -190,6 +190,7 @@ systemctl start shsd
 # add cron task to read logs
 $final_path/workers/loggers/imap-dovecot.py
 $final_path/workers/loggers/auth-nginx.py
+$final_path/workers/loggers/ssh-sshd.py
 sudo mv ../conf/cron /etc/cron.d/$app
 chown root:root /etc/cron.d/$app
 ynh_replace_string "__FINALPATH__" "$final_path" "/etc/cron.d/$app"

@@ -4,3 +4,4 @@
 #
 * */6 * * *      root    [ -x __FINALPATH__/workers/loggers/imap-dovecot.py ] && __FINALPATH__/workers/loggers/imap-dovecot.py > /dev/null
 * */6 * * *      root    [ -x __FINALPATH__/workers/loggers/auth-nginx.py ] && __FINALPATH__/workers/loggers/auth-nginx.py > /dev/null
+* */6 * * *      root    [ -x __FINALPATH__/workers/loggers/ssh-sshd.py ] && __FINALPATH__/workers/loggers/ssh-sshd.py > /dev/null
