@@ -18,6 +18,7 @@ domain=$(ynh_app_setting_get $app domain)
 path_url=$(ynh_app_setting_get $app path)
 final_path=$(ynh_app_setting_get $app final_path)
 language=$(ynh_app_setting_get $app language)
+port=$(ynh_app_setting_get $app port)
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
