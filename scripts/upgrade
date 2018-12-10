@@ -68,20 +68,13 @@ ynh_secure_remove /tmp/shsd-master
 #=================================================
 
 # Create a dedicated nginx config
-ynh_add_nginx_config
+#ynh_add_nginx_config
 
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
 
-ynh_install_app_dependencies deb1 deb2
-ynh_add_nginx_config
-if [ "$path_url" != "/" ]
-then
-	ynh_replace_string "^#sub_path_only" "" "/etc/nginx/conf.d/$domain.d/$app.conf"
-fi
-ynh_store_file_checksum "/etc/nginx/conf.d/$domain.d/$app.conf"
-sudo service nginx reload
+ynh_install_app_dependencies python3 python3-sqlalchemy python3-flask python3-geojson python3-geoip geoip-database-extra
 
 #=================================================
 # CREATE DEDICATED USER
@@ -117,16 +110,6 @@ ynh_add_systemd_config
 chown -R root: $final_path
 chown -R shsd: /var/lib/shsd
 
-#=================================================
-# SETUP SSOWAT
-#=================================================
-
-# Make app public if necessary
-if [ $is_public -eq 1 ]
-then
-	# unprotected_uris allows SSO credentials to be passed anyway
-	ynh_app_setting_set $app unprotected_uris "/"
-fi
 
 #=================================================
 # RELOAD NGINX
