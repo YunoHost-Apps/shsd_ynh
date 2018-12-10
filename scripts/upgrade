@@ -59,7 +59,7 @@ path_url=$(ynh_normalize_url_path $path_url)
 # ynh_setup_source "$final_path"
 wget https://github.com/dynamid/shsd/archive/master.zip -O /tmp/shsd.zip
 unzip -u /tmp/shsd.zip -d /tmp
-mv /tmp/shsd-master/* "$final_path"
+cp -ar /tmp/shsd-master/* "$final_path"
 ynh_secure_remove /tmp/shsd.zip
 ynh_secure_remove /tmp/shsd-master
 
