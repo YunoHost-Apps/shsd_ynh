@@ -22,16 +22,13 @@ path_url=$YNH_APP_ARG_PATH
 language=$YNH_APP_ARG_LANGUAGE
 
 #=================================================
-# CREATE
-#=================================================
-mkdir -p /var/lib/shsd
-
-#=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
 app=$YNH_APP_INSTANCE_NAME
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
+
+mkdir -p /var/lib/shsd
 
 # Normalize the url path syntax
 path_url=$(ynh_normalize_url_path $path_url)
