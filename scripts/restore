@@ -83,8 +83,7 @@ ynh_systemd_action --action=restart --service_name=fail2ban
 ynh_script_progression --message="Reinstalling dependencies..." --time --weight=1
 
 # Define and install dependencies
-ynh_install_app_dependencies python3 python3-sqlalchemy python3-flask python3-geojson python3-geoip geoip-database-extra python3-requests
-
+ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # RESTORE SYSTEMD
@@ -105,7 +104,7 @@ yunohost service add $app --log "/var/log/$app/$app.log"
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --time --weight=1
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action=start --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # RESTORE THE CRON FILE
@@ -113,15 +112,13 @@ ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$ap
 
 ynh_restore_file --origin_path="/etc/cron.d/$app"
 
-
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
 # RELOAD NGINX AND PHP-FPM
 #=================================================
-ynh_script_progression --message="Reloading nginx web server and php-fpm..." --time --weight=1
+ynh_script_progression --message="Reloading nginx web server..." --time --weight=1
 
-ynh_systemd_action --service_name=php7.0-fpm --action=reload
 ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================

@@ -5,114 +5,109 @@
 #=================================================
 # IMPORT GENERIC HELPERS
 #=================================================
+
+source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
 # MANAGE SCRIPT FAILURE
 #=================================================
 
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+v
 
 #=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
+
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
 language=$YNH_APP_ARG_LANGUAGE
 
+app=$YNH_APP_INSTANCE_NAME
+
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-app=$YNH_APP_INSTANCE_NAME
+ynh_script_progression --message="Validating installation parameters..." --time --weight=1
+
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
 mkdir -p /var/lib/shsd
 
-# Normalize the url path syntax
-path_url=$(ynh_normalize_url_path $path_url)
-
-# Check web path availability
-ynh_webpath_available $domain $path_url
 # Register (book) web path
-ynh_webpath_register $app $domain $path_url
+ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
+
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_app_setting_set $app domain $domain
-ynh_app_setting_set $app path $path_url
-ynh_app_setting_set $app language $language
+ynh_script_progression --message="Storing installation settings..." --time --weight=1
+
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
+ynh_app_setting_set --app=$app --key=language --value=$language
 
 #=================================================
 # STANDARD MODIFICATIONS
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
+ynh_script_progression --message="Finding an available port..." --time --weight=1
 
-# Find a free port
-port=$(ynh_find_port 8095)
+port=$(ynh_find_port --port=8095)
+ynh_app_setting_set --app=$app --key=port --value=$port
+
 # Open this port
 yunohost firewall allow --no-upnp TCP $port 2>&1
-ynh_app_setting_set $app port $port
 
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
+ynh_script_progression --message="Installing dependencies..." --time --weight=1
 
-#apt-get install -y geoip-database-contrib
-ynh_install_app_dependencies python3 python3-sqlalchemy python3-flask python3-geojson python3-geoip geoip-database-extra python3-requests
-#geoip-database-extra
+ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression --message="Setting up source files..." --time --weight=1
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
-#ynh_setup_source "$final_path"
-mkdir -p "$final_path"
-wget https://github.com/dynamid/shsd/archive/master.zip -O /tmp/shsd.zip
-unzip -u /tmp/shsd.zip -d /tmp
-mv /tmp/shsd-master/* "$final_path"
-ynh_secure_remove /tmp/shsd.zip
-ynh_secure_remove /tmp/shsd-master
-
-
+ynh_setup_source --dest_dir="$final_path"
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
 
-# Create a dedicated nginx config
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Configuring NGINX web server..." --time --weight=1
+
+# Create a dedicated NGINX config
 ynh_add_nginx_config
-if [ "$path_url" != "/" ]
-then
-	ynh_replace_string "^#sub_path_only" "" "/etc/nginx/conf.d/$domain.d/$app.conf"
-fi
-ynh_store_file_checksum "/etc/nginx/conf.d/$domain.d/$app.conf"
-sudo service nginx reload
+
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
+ynh_script_progression --message="Configuring system user..." --time --weight=1
 
 # Create a system user
-ynh_system_user_create $app
+ynh_system_user_create --username=$app
 
-#=================================================
-# SPECIFIC SETUP
-#=================================================
-# ...
 #=================================================
 # Needs for
 #=================================================
+
 # Copy config SHSD in /etc/
-sudo mv $final_path/shsd.conf /etc/
+mv $final_path/shsd.conf /etc/
 
 #=================================================
 # SETUP SYSTEMD
 #=================================================
+ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
@@ -125,20 +120,12 @@ ynh_add_systemd_config
 chown -R $app: $final_path
 chown -R shsd: /var/lib/shsd
 
-
-# Set the app as temporarily public for curl call
-ynh_app_setting_set $app skipped_uris "/"
-# Reload SSOwat config
-yunohost app ssowatconf
-
-# Reload Nginx
-systemctl reload nginx
-
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 # Put the right port in config files // on peut utiliser ynh_replace_string
 ynh_replace_string "5000" "$port" "/etc/shsd.conf"
+ynh_replace_string --match_string="match_string" --replace_string="replace_string" --target_file="$final_path/CONFIG_FILE"
 
 #=================================================
 # STORE THE CHECKSUM OF THE CONFIG FILE
@@ -148,38 +135,33 @@ ynh_replace_string "5000" "$port" "/etc/shsd.conf"
 ynh_store_file_checksum "/etc/shsd.conf"
 
 #=================================================
-# GENERIC FINALIZATION
+# INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
+ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
 
-# Set permissions to app files
-chown -R root: $final_path
-
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-
-# Use logrotate to manage application logfile(s)
-#ynh_use_logrotate
-
-#=================================================
-# ADVERTISE SERVICE IN ADMIN PANEL
-#=================================================
-
-yunohost service add $app --log "/var/log/daemon.log"
+yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
+ynh_script_progression --message="Configuring permissions..." --time --weight=1
 
-ynh_app_setting_delete $app skipped_uris
+# Make app public if necessary
+if [ $is_public -eq 1 ]
+then
+	# Everyone can access the app.
+	# The "main" permission is automatically created before the install script.
+	ynh_permission_update --permission="main" --add="visitors"
+fi
 
 #=================================================
 # RELOAD NGINX
 #=================================================
+ynh_script_progression --message="Reloading NGINX web server..." --time --weight=1
 
-systemctl reload nginx
+ynh_systemd_action --service_name=nginx --action=reload
+
+
 #systemctl daemon-reload
 systemctl start shsd
 

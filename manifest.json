@@ -1,6 +1,6 @@
 
 {
-    "name": "Self-Hosting Security Dashboard",
+    "name": "SHSD",
     "id": "shsd",
     "packaging_format": 1,
     "description": {
@@ -16,7 +16,7 @@
         "url": "http://perso.citi-lab.fr/flesueur/"
     },
     "requirements": {
-        "yunohost": ">= 2.7.2"
+        "yunohost": ">= 4.0.0"
     },
     "multi_instance": false,
     "services": [
@@ -34,7 +34,6 @@
                 },
                 "example": "shsd.packaging"
             },
-
             {
                 "name": "path",
                 "type": "path",

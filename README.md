@@ -1,4 +1,4 @@
-# SHSD_YNH - Self-Hosting Security Dashboard package for Yunohost
+# sSelf-Hosting Security Dashboard for YunoHost
 
 - [SHSD project](https://github.com/dynamid/shsd/)
 - [Yunohost project](https://yunohost.org)
