@@ -1,7 +1,22 @@
-# sSelf-Hosting Security Dashboard for YunoHost
+# Self-Hosting Security Dashboard for YunoHost
 
-- [SHSD project](https://github.com/dynamid/shsd/)
-- [Yunohost project](https://yunohost.org)
+[![Integration level](https://dash.yunohost.org/integration/REPLACEBYYOURAPP.svg)](https://dash.yunohost.org/appci/app/REPLACEBYYOURAPP) ![](https://ci-apps.yunohost.org/ci/badges/REPLACEBYYOURAPP.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/REPLACEBYYOURAPP.maintain.svg)  
+[![Install REPLACEBYYOURAPP with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=REPLACEBYYOURAPP)
+
+*[Lire ce readme en français.](./README_fr.md)*
+
+> *This package allows you to install REPLACEBYYOURAPP quickly and simply on a YunoHost server.  
+If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
+
+## Overview
+There is no security without proper monitoring. SHSD aims to provide a synthetic overview of the security status of accounts and devices in a self-hosting context. It is tailored to users who can deploy self-hosting solutions (such as Yunohost or Sandstorm) or who have an account (mail address) on such hosting, without requiring expert security knowledge.
+
+**Shipped version:** 0.1.3
+
+## Screenshots
+
+![](https://github.com/dynamid/shsd/blob/master/doc/screenshot.png)
+
 
 There is no security without proper monitoring. SHSD aims to provide a synthetic overview of the security status of accounts and devices in a self-hosting context. It is tailored to users who can deploy self-hosting solutions (such as Yunohost or Sandstorm) or who have an account (mail address) on such hosting, without requiring expert security knowledge.
 
@@ -34,25 +49,26 @@ It is aimed to be watched by the final users :
 * If some points are in a strange area (a foreign country or an anormal ISP for instance), user should detect this unusual pattern and then ask the hoster/forums. It may mean that the account has been used by a third-party
 * SHSD focus on the detection part, the remediation is out of our scope. We think that the global community on forums is quite efficient for remediation as soon as problems are detected.
 
-![SHSD](https://github.com/dynamid/shsd/blob/master/doc/screenshot.png)
-
  In a nutshell, SHSD tries to leverage users' unconscious reactions confronted with some change on a page which is usually quite static.
 
-# Why ?
 
-_Because self-hosting security matters._
+## Links
 
-Self-hosting is necessary to provide alternatives to GAFAMs. Security of self-hosting is a necessity for self-hosting to compete with GAFAMs. Security of self-hosting cannot be achieved in the same way as the security of GAFAMs but, on the other hand, self-hosters may have a better insight on what _should_ happen on their server.
+ * Report a bug: https://github.com/YunoHost-Apps/shsd_ynh/issues
+ * App website: Link to the official website of this app.
+ * Upstream app repository: https://github.com/dynamid/shsd
+ * YunoHost website: https://yunohost.org/
 
-Notably, exists :
+---
 
-* SIEM tools (prelude, ELK, etc.) exhibit security alerts but need dedicated human resources to provide any value ;
-* Monitoring tools (Nagios, Grafana, etc.) show functional metrics (free memory, CPU usage) but security is mostly about non-functional activities (for which graphs are close to useless or need huge interpretation).
+## Developer info
 
-SHSD aims to provide value to self-hosters who are not security experts. To achieve this, SHSD leverages specific knowledge and insights a self-hoster may have about his own devices or the few hosted guest accounts.
+Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/shsd_ynh/tree/testing).
 
-SHSD does not feature any AI nor precog features.
+To try the testing branch, please proceed like that.
+```
+sudo yunohost app install https://github.com/YunoHost-Apps/shsd_ynh/tree/testing --debug
+or
+sudo yunohost app upgrade shsd -u https://github.com/YunoHost-Apps/shsd_ynh/tree/testing --debug
+```
 
-# Install notes
-
-SHSD can be installed with `yunohost app install https://github.com/dynamid/shsd_ynh`

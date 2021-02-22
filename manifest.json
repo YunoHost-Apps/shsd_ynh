@@ -9,7 +9,7 @@
     },
     "version": "0.1.3~ynh1",
     "url": "https://github.com/dynamid/shsd",
-    "license": "free",
+    "license": "AGPL-3.0-only",
     "maintainer": {
         "name": "François Lesueur",
         "email": "francois.lesueur@insa-lyon.fr",
