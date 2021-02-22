@@ -1,11 +1,11 @@
 # Self-Hosting Security Dashboard for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/REPLACEBYYOURAPP.svg)](https://dash.yunohost.org/appci/app/REPLACEBYYOURAPP) ![](https://ci-apps.yunohost.org/ci/badges/REPLACEBYYOURAPP.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/REPLACEBYYOURAPP.maintain.svg)  
-[![Install REPLACEBYYOURAPP with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=REPLACEBYYOURAPP)
+[![Integration level](https://dash.yunohost.org/integration/shsd.svg)](https://dash.yunohost.org/appci/app/shsd) ![](https://ci-apps.yunohost.org/ci/badges/shsd.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/shsd.maintain.svg)  
+[![Install shsd with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=shsd)
 
 *[Lire ce readme en français.](./README_fr.md)*
 
-> *This package allows you to install REPLACEBYYOURAPP quickly and simply on a YunoHost server.  
+> *This package allows you to install shsd quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
 
 ## Overview
@@ -16,7 +16,6 @@ There is no security without proper monitoring. SHSD aims to provide a synthetic
 ## Screenshots
 
 ![](https://github.com/dynamid/shsd/blob/master/doc/screenshot.png)
-
 
 There is no security without proper monitoring. SHSD aims to provide a synthetic overview of the security status of accounts and devices in a self-hosting context. It is tailored to users who can deploy self-hosting solutions (such as Yunohost or Sandstorm) or who have an account (mail address) on such hosting, without requiring expert security knowledge.
 
